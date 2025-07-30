@@ -1,0 +1,755 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f8f5f2;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* /////////// Utility Classes /////////// */
+.container {
+  max-width: 1200px;
+  width: 90%;
+  margin: auto;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6em 1.8em;
+  text-decoration: none;
+  border-radius: 50px;
+  cursor: pointer;
+  outline: none;
+  margin-top: 1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  color: #fff;
+  background: #c41e1e; /* Rojo carnicería premium */
+  border: 2px solid #a01818;
+}
+
+.btn-primary:hover {
+  background: #a01818;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* /////////// Navbar /////////// */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+  color: #333;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  height: 64px;
+  opacity: 0.95;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #eee;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #c41e1e;
+  letter-spacing: 1px;
+}
+
+.menu-items {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.menu-items a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.menu-items a:hover {
+  color: #c41e1e;
+}
+
+/* Hamburgador (móvil) */
+.navbar input[type="checkbox"],
+.navbar .hamburger-lines {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navbar input[type="checkbox"],
+  .navbar .hamburger-lines {
+    display: block;
+  }
+
+  .navbar-container {
+    position: relative;
+    height: 64px;
+  }
+
+  .navbar input[type="checkbox"] {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 5;
+    opacity: 0;
+    height: 32px;
+    width: 30px;
+  }
+
+  .hamburger-lines {
+    position: absolute;
+    top: 17px;
+    left: 20px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 35px;
+    height: 23px;
+  }
+
+  .hamburger-lines .line {
+    display: block;
+    margin-top: 2px;
+    height: 4px;
+    width: 100%;
+    background: #333;
+    border-radius: 2px;
+    transition: all 0.4s ease;
+  }
+
+  .hamburger-lines .line1 { transform-origin: 0% 0%; }
+  .hamburger-lines .line3 { transform-origin: 0% 100%; }
+
+  .menu-items {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 100px 20px 30px;
+    transition: left 0.5s ease;
+    z-index: 100;
+  }
+
+  .menu-items li {
+    margin-bottom: 1.8rem;
+    font-size: 1.4rem;
+  }
+
+  .navbar input[type="checkbox"]:checked ~ .menu-items {
+    left: 0;
+  }
+
+  .navbar input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+    transform: rotate(35deg);
+  }
+
+  .navbar input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+    opacity: 0;
+  }
+
+  .navbar input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+    transform: rotate(-35deg);
+  }
+
+  .logo {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-size: 2.2rem;
+  }
+}
+
+/* /////////// Scroll Margin para evitar superposición /////////// */
+#home,
+#about,
+#category,
+#products,
+#testimonials,
+#contact {
+  scroll-margin-top: 64px; /* Altura del navbar */
+}
+
+/* /////////// Showcase (Home) /////////// */
+.showcase-area {
+  height: 100vh;
+  min-height: 500px;
+  background: linear-gradient(rgba(52, 52, 52, 0.089), rgba(0, 0, 0, 0.6)),
+              url("https://images.pexels.com/photos/33157191/pexels-photo-33157191.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+
+.showcase-container {
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.main-title {
+  font-size: 4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.showcase-container p {
+  font-size: 1.6rem;
+  margin-bottom: 1.5em;
+  opacity: 0.9;
+}
+
+/* /////////// About /////////// */
+#about {
+  padding: 6rem 0;
+  background: #f9f7f4;
+}
+
+.about-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3rem;
+}
+
+.about-text {
+  flex: 1 1 400px;
+  padding: 2rem;
+}
+
+.about-text .small {
+  color: #c41e1e;
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.about-text h2 {
+  font-size: 2.5rem;
+  color: #222;
+  margin: 0.5em 0 1em;
+  line-height: 1.2;
+}
+
+.about-text p {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+.about-img {
+  flex: 1 1 400px;
+}
+
+.about-img img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  object-fit: cover;
+}
+
+/* /////////// Category (Tipos de carne) /////////// */
+#category {
+  padding: 6rem 0;
+  background: #fff;
+  text-align: center;
+}
+
+#category h2 {
+  font-size: 2.8rem;
+  color: #222;
+  margin-bottom: 3rem;
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+}
+
+#category h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: #c41e1e;
+}
+
+.food-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.food-type {
+  flex: 1 1 280px;
+  max-width: 320px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease; /* Transición suave para todos los cambios */
+  position: relative; /* Asegura que el z-index funcione bien */
+  height: 320px; /* Altura fija para evitar saltos de layout */
+}
+
+.food-type:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al hover */
+}
+
+.img-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease; /* Zoom suave opcional */
+}
+
+.food-type:hover .img-container img {
+  transform: scale(1.05); /* Efecto de zoom sutil en la imagen */
+}
+
+.img-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Animación más natural */
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.img-content h3 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.img-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(113, 120, 120, 0.03),
+    rgba(113, 120, 120, 0.100),
+    rgba(113, 120, 120, 0.250),
+    rgba(113, 20, 20, 0.8)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+/* Sincronizar hover: fondo + texto */
+.food-type:hover .img-container::after,
+.food-type:hover .img-content {
+  opacity: 1;
+}
+
+.food-type:hover .img-content {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* /////////// Products (Menú de productos) /////////// */
+#products {
+  padding: 6rem 0;
+  background: #f9f7f4;
+}
+
+.food-menu-heading {
+  text-align: center;
+  font-size: 3.2rem;
+  color: #222;
+  margin-bottom: 3rem;
+  font-weight: 500;
+  position: relative;
+}
+
+.food-menu-heading::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 3px;
+  background: #c41e1e;
+  margin: 1rem auto;
+}
+
+.food-menu-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.food-menu-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 50% imagen - 50% texto */
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.food-menu-item:hover {
+  transform: translateY(-4px);
+}
+
+.food-img img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.food-description {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.food-titile {
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.food-description p {
+  color: #666;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+}
+
+.food-price {
+  color: #c41e1e;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+
+/* /////////// Testimonials /////////// */
+#testimonials {
+  padding: 6rem 0;
+  background: #fff;
+  text-align: center;
+}
+
+.testimonial-title {
+  font-size: 2.8rem;
+  color: #222;
+  margin-bottom: 2.5rem;
+}
+
+.testimonial-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0 20px;
+}
+
+.testimonial-box {
+  background: #f9f7f4;
+  padding: 2rem;
+  border-radius: 12px ;
+  max-width: 350px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  /* Transición suave para el efecto */
+  transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el ratón (hover) */
+.testimonial-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+
+.testimonial-box .customer-photo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.customer-photo img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.customer-name {
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+}
+
+.star-rating {
+  margin-bottom: 1rem;
+  color: #ff9529;
+}
+
+.star-rating .fa {
+  color: #ff9529; /* Estrellas llenas y media estrella en amarillo */
+  font-size: 1.2rem;
+}
+
+.star-rating .fa-star,
+.star-rating .fa-star-half-alt {
+  color: #ccc; /* Estrellas vacías o semi vacias por defeecto grises */
+}
+
+.star-rating .fa-star.checked {
+  color: #ff9529; /* Estrellas llenas (puedes cambiar el color) */
+}
+
+.testimonial-text {
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* /////////// Contact /////////// */
+#contact {
+  padding: 6rem 0;
+  background: #f9f7f4;
+}
+
+.contact-container {
+  display: flex;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.contact-img {
+  flex: 1 1 300px;
+}
+
+.contact-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.form-container {
+  flex: 1 1 300px;
+  padding: 3rem;
+}
+
+.form-container h2 {
+  font-size: 2.4rem;
+  color: #222;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.form-container input,
+.form-container textarea {
+  width: 100%;
+  padding: 0.8rem 0;
+  margin-bottom: 1.5rem;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  outline: none;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #444;
+  transition: border-color 0.3s ease;
+}
+
+.form-container input:focus,
+.form-container textarea:focus {
+  border-bottom-color: #c41e1e;
+}
+
+.form-container textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-container .btn {
+  margin-top: 0.5rem;
+}
+
+/* /////////// Footer /////////// */
+#footer {
+  text-align: center;
+  padding: 2.5rem 0;
+  background: #222;
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+/* /////////// Responsive /////////// */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 3rem;
+  }
+
+  .showcase-container p {
+    font-size: 1.4rem;
+  }
+
+  .food-menu-item {
+    flex-direction: column;
+    text-align: center;
+
+  }
+
+  .food-description {
+    text-align: center;
+  }
+
+  .food-img img {
+    margin-bottom: 1rem;
+  }
+
+  .about-wrapper {
+    text-align: center;
+  }
+
+  .about-text,
+  .about-img {
+    flex: 1 1 100%;
+  }
+
+  .contact-container {
+    flex-direction: column;
+  }
+
+  .contact-img,
+  .form-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  html {
+    font-size: 65%;
+  }
+
+  .menu-items li {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .main-title {
+    font-size: 2.8rem;
+  }
+
+  .testimonial-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .testimonial-box {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .food-menu-item {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+
+  .food-img img {
+    height: 250px;
+  }
+}
+
+/* /////////// Fade-in Animation on Scroll /////////// */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Puedes personalizar por sección si quieres tiempos distintos */
+#about.fade-in,
+#category.fade-in,
+#products.fade-in,
+#testimonials.fade-in,
+#contact.fade-in {
+  transition-delay: 0.6s;
+}
+
