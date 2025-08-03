@@ -17,6 +17,12 @@ $(document).ready(function () {
           window.location.hash = target.attr("id");
         }
       );
+
+      // Cerrar menú móvil al hacer clic en un enlace
+      const checkbox = document.querySelector('.navbar-container input[type="checkbox"]');
+      if (checkbox) {
+        checkbox.checked = false;
+      }
     }
   });
 
@@ -31,14 +37,12 @@ $(document).ready(function () {
       const viewportTop = $(window).scrollTop();
       const viewportBottom = viewportTop + $(window).height();
 
-      // Si el elemento entra en el 80% superior de la pantalla
       if (elementTop < viewportBottom - 100 && elementBottom > viewportTop) {
         element.addClass("visible");
       }
     });
   }
 
-  // Ejecutar al cargar y al hacer scroll
   checkFade();
   $(window).on("scroll", checkFade);
 
@@ -59,15 +63,19 @@ $(document).ready(function () {
       }, 100);
     }
   }
-});
 
-  // Cerrar menú móvil al hacer clic en un enlace
-  document.querySelectorAll('.menu-items a').forEach(link => {
-    link.addEventListener('click', () => {
-      // Deseleccionar el checkbox (esto cierra el menú)
-      const checkbox = document.querySelector('.navbar-container input[type="checkbox"]');
-      if (checkbox) {
-        checkbox.checked = false;
-      }
+  // ====== 4. Hamburguesa → X (JavaScript solo si necesitas clase 'active') ======
+  // Opcional: si quieres usar clases para más control
+  const hamburger = document.querySelector('.hamburger-menu');
+  const checkbox = document.getElementById('menu-toggle');
+
+  if (hamburger && checkbox) {
+    hamburger.addEventListener('click', function () {
+      // El checkbox ya cambia de estado al hacer clic en el label
+      // Pero si quieres agregar una clase 'active' al hamburguesa, puedes hacerlo
+      // Nota: en tu CSS actual no usas .active, así que esto es opcional
     });
-  });
+  }
+
+  // No necesitas más JS: la animación X está manejada 100% por CSS
+});

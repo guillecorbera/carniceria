@@ -5,11 +5,9 @@
   padding: 0;
   margin: 0;
 }
-
 html {
   font-size: 62.5%; /* 1rem = 10px */
 }
-
 body {
   font-family: "Poppins", sans-serif;
   background: #f8f5f2;
@@ -23,7 +21,6 @@ body {
   width: 90%;
   margin: auto;
 }
-
 .btn {
   display: inline-block;
   padding: 0.6em 1.8em;
@@ -38,13 +35,11 @@ body {
   transition: all 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-
 .btn-primary {
   color: #fff;
   background: #c41e1e; /* Rojo carnicería premium */
   border: 2px solid #a01818;
 }
-
 .btn-primary:hover {
   background: #a01818;
   transform: translateY(-2px);
@@ -65,29 +60,27 @@ body {
   backdrop-filter: blur(10px);
   border-bottom: 1px solid #eee;
 }
-
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
   padding: 0 20px;
+  position: relative;
 }
-
 .logo {
   font-family: 'Playfair Display', serif;
   font-size: 2.4rem;
   font-weight: 700;
   color: #c41e1e;
   letter-spacing: 1px;
+  z-index: 2;
 }
-
 .menu-items {
   display: flex;
   list-style: none;
   gap: 2rem;
 }
-
 .menu-items a {
   text-decoration: none;
   color: #444;
@@ -95,63 +88,30 @@ body {
   font-size: 1.2rem;
   transition: color 0.3s ease;
 }
-
 .menu-items a:hover {
   color: #c41e1e;
 }
 
-/* Hamburgador (móvil) */
-.navbar input[type="checkbox"],
-.navbar .hamburger-lines {
+/* Checkbox oculto por defecto (solo activo en móvil) */
+#menu-toggle {
   display: none;
 }
 
+/* Hamburger menu (solo en móvil) */
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+  z-index: 3;
+}
+
+/* Solo en móviles: mostramos hamburguesa y ocultamos menú normal */
 @media (max-width: 768px) {
-  .navbar input[type="checkbox"],
-  .navbar .hamburger-lines {
+  /* Mostramos hamburguesa */
+  .hamburger-menu {
     display: block;
   }
 
-  .navbar-container {
-    position: relative;
-    height: 64px;
-  }
-
-  .navbar input[type="checkbox"] {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 5;
-    opacity: 0;
-    height: 32px;
-    width: 30px;
-  }
-
-  .hamburger-lines {
-    position: absolute;
-    top: 17px;
-    left: 20px;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 35px;
-    height: 23px;
-  }
-
-  .hamburger-lines .line {
-    display: block;
-    margin-top: 2px;
-    height: 4px;
-    width: 100%;
-    background: #333;
-    border-radius: 2px;
-    transition: all 0.4s ease;
-  }
-
-  .hamburger-lines .line1 { transform-origin: 0% 0%; }
-  .hamburger-lines .line3 { transform-origin: 0% 100%; }
-
+  /* Menú móvil deslizante */
   .menu-items {
     position: fixed;
     top: 0;
@@ -168,32 +128,61 @@ body {
     z-index: 100;
   }
 
-  .menu-items li {
-    margin-bottom: 1.8rem;
-    font-size: 1.4rem;
-  }
-
-  .navbar input[type="checkbox"]:checked ~ .menu-items {
+  /* Menú visible cuando checkbox está marcado */
+  #menu-toggle:checked ~ .menu-items {
     left: 0;
   }
 
-  .navbar input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
-    transform: rotate(35deg);
+  /* Animación de hamburguesa → X */
+  .hamburger-lines {
+    width: 30px;
+    height: 21px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .line {
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
   }
 
-  .navbar input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+  #menu-toggle:checked + .hamburger-menu .line1 {
+    transform: rotate(45deg) translate(7px, 7px);
+  }
+  #menu-toggle:checked + .hamburger-menu .line2 {
     opacity: 0;
   }
-
-  .navbar input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
-    transform: rotate(-35deg);
+  #menu-toggle:checked + .hamburger-menu .line3 {
+    transform: rotate(-45deg) translate(7px, -7px);
   }
 
+  /* Posición del logo en móvil */
   .logo {
     position: absolute;
     top: 12px;
     right: 20px;
     font-size: 2.2rem;
+  }
+}
+
+/* En pantallas grandes: aseguramos que el menú esté visible */
+@media (min-width: 769px) {
+  .menu-items {
+    position: static; /* Elimina cualquier posición fija */
+    left: auto;
+    width: auto;
+    height: auto;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    display: flex;
+  }
+  .hamburger-menu {
+    display: none;
   }
 }
 
@@ -222,12 +211,10 @@ body {
   text-align: center;
   color: #fff;
 }
-
 .showcase-container {
   max-width: 800px;
   padding: 0 20px;
 }
-
 .main-title {
   font-size: 4rem;
   font-weight: 700;
@@ -236,7 +223,6 @@ body {
   letter-spacing: 1px;
   color: #fff;
 }
-
 .showcase-container p {
   font-size: 1.6rem;
   margin-bottom: 1.5em;
@@ -247,20 +233,18 @@ body {
 #about {
   padding: 6rem 0;
   background: #f9f7f4;
-}
 
+}
 .about-wrapper {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 3rem;
 }
-
 .about-text {
   flex: 1 1 400px;
   padding: 2rem;
 }
-
 .about-text .small {
   color: #c41e1e;
   font-weight: 600;
@@ -268,24 +252,20 @@ body {
   letter-spacing: 1px;
   text-transform: uppercase;
 }
-
 .about-text h2 {
   font-size: 2.5rem;
   color: #222;
   margin: 0.5em 0 1em;
   line-height: 1.2;
 }
-
 .about-text p {
   font-size: 1.2rem;
   color: #555;
   line-height: 1.7;
 }
-
 .about-img {
   flex: 1 1 400px;
 }
-
 .about-img img {
   width: 100%;
   height: auto;
@@ -300,7 +280,6 @@ body {
   background: #fff;
   text-align: center;
 }
-
 #category h2 {
   font-size: 2.8rem;
   color: #222;
@@ -309,7 +288,6 @@ body {
   position: relative;
   display: inline-block;
 }
-
 #category h2::after {
   content: "";
   position: absolute;
@@ -320,67 +298,58 @@ body {
   height: 3px;
   background: #c41e1e;
 }
-
 .food-container {
   display: flex;
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
 }
-
 .food-type {
   flex: 1 1 280px;
   max-width: 320px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s ease; /* Transición suave para todos los cambios */
-  position: relative; /* Asegura que el z-index funcione bien */
-  height: 320px; /* Altura fija para evitar saltos de layout */
+  transition: all 0.4s ease;
+  position: relative;
+  height: 320px;
 }
-
 .food-type:hover {
   transform: translateY(-8px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al hover */
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
 }
-
 .img-container {
   width: 100%;
   height: 100%;
   position: relative;
   overflow: hidden;
 }
-
 .img-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease; /* Zoom suave opcional */
+  transition: transform 0.5s ease;
 }
-
 .food-type:hover .img-container img {
-  transform: scale(1.05); /* Efecto de zoom sutil en la imagen */
+  transform: scale(1.05);
 }
-
 .img-content {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.9);
   opacity: 0;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Animación más natural */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
   color: #fff;
   z-index: 2;
   pointer-events: none;
 }
-
 .img-content h3 {
   font-size: 2.2rem;
   font-weight: 600;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
-
 .img-container::after {
   content: "";
   position: absolute;
@@ -399,13 +368,10 @@ body {
   transition: opacity 0.4s ease;
   z-index: 1;
 }
-
-/* Sincronizar hover: fondo + texto */
 .food-type:hover .img-container::after,
 .food-type:hover .img-content {
   opacity: 1;
 }
-
 .food-type:hover .img-content {
   transform: translate(-50%, -50%) scale(1);
 }
@@ -415,7 +381,6 @@ body {
   padding: 6rem 0;
   background: #f9f7f4;
 }
-
 .food-menu-heading {
   text-align: center;
   font-size: 3.2rem;
@@ -424,7 +389,6 @@ body {
   font-weight: 500;
   position: relative;
 }
-
 .food-menu-heading::after {
   content: "";
   display: block;
@@ -433,7 +397,6 @@ body {
   background: #c41e1e;
   margin: 1rem auto;
 }
-
 .food-menu-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -442,10 +405,9 @@ body {
   max-width: 1200px;
   margin: 0 auto;
 }
-
 .food-menu-item {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 50% imagen - 50% texto */
+  grid-template-columns: 1fr 1fr;
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
@@ -454,45 +416,38 @@ body {
   max-width: 800px;
   margin: 0 auto;
 }
-
 .food-menu-item:hover {
   transform: translateY(-4px);
 }
-
 .food-img img {
   width: 100%;
   height: 200px;
   object-fit: cover;
   object-position: center;
 }
-
 .food-description {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
 .food-titile {
   font-size: 1.8rem;
   color: #222;
   margin-bottom: 0.5rem;
   font-weight: 600;
 }
-
 .food-description p {
   color: #666;
   font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 0.8rem;
 }
-
 .food-price {
   color: #c41e1e;
   font-weight: 700;
   font-size: 1.4rem;
 }
-
 
 /* /////////// Testimonials /////////// */
 #testimonials {
@@ -500,13 +455,11 @@ body {
   background: #fff;
   text-align: center;
 }
-
 .testimonial-title {
   font-size: 2.8rem;
   color: #222;
   margin-bottom: 2.5rem;
 }
-
 .testimonial-container {
   display: flex;
   flex-wrap: wrap;
@@ -514,31 +467,25 @@ body {
   gap: 2rem;
   padding: 0 20px;
 }
-
 .testimonial-box {
   background: #f9f7f4;
   padding: 2rem;
-  border-radius: 12px ;
+  border-radius: 12px;
   max-width: 350px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   text-align: left;
-  /* Transición suave para el efecto */
   transition: all 0.3s ease;
 }
-
-/* Efecto al pasar el ratón (hover) */
 .testimonial-box:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   z-index: 1;
 }
-
 .testimonial-box .customer-photo {
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
 }
-
 .customer-photo img {
   width: 60px;
   height: 60px;
@@ -546,32 +493,26 @@ body {
   object-fit: cover;
   margin-right: 1rem;
 }
-
 .customer-name {
   font-weight: 600;
   color: #222;
   margin: 0;
 }
-
 .star-rating {
   margin-bottom: 1rem;
   color: #ff9529;
 }
-
 .star-rating .fa {
-  color: #ff9529; /* Estrellas llenas y media estrella en amarillo */
+  color: #ff9529;
   font-size: 1.2rem;
 }
-
 .star-rating .fa-star,
 .star-rating .fa-star-half-alt {
-  color: #ccc; /* Estrellas vacías o semi vacias por defeecto grises */
+  color: #ccc;
 }
-
 .star-rating .fa-star.checked {
-  color: #ff9529; /* Estrellas llenas (puedes cambiar el color) */
+  color: #ff9529;
 }
-
 .testimonial-text {
   color: #555;
   font-size: 1.1rem;
@@ -583,7 +524,6 @@ body {
   padding: 6rem 0;
   background: #f9f7f4;
 }
-
 .contact-container {
   display: flex;
   background: #fff;
@@ -594,29 +534,24 @@ body {
   margin: auto;
   flex-wrap: wrap;
 }
-
 .contact-img {
   flex: 1 1 300px;
 }
-
 .contact-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .form-container {
   flex: 1 1 300px;
   padding: 3rem;
 }
-
 .form-container h2 {
   font-size: 2.4rem;
   color: #222;
   margin-bottom: 1.5rem;
   font-weight: 600;
 }
-
 .form-container input,
 .form-container textarea {
   width: 100%;
@@ -630,105 +565,123 @@ body {
   color: #444;
   transition: border-color 0.3s ease;
 }
-
 .form-container input:focus,
 .form-container textarea:focus {
   border-bottom-color: #c41e1e;
 }
-
 .form-container textarea {
   resize: vertical;
   min-height: 120px;
 }
-
 .form-container .btn {
   margin-top: 0.5rem;
 }
 
 /* /////////// Footer /////////// */
 #footer {
-  text-align: center;
+  display: flex;
   padding: 2.5rem 0;
   background: #222;
   color: #fff;
   font-size: 1.3rem;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+.footer-left p {
+  margin: 0;
+}
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+.social-icons a {
+  color: #fff;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+.social-icons a:hover {
+  color: #00aaff;
+}
+.btn-dev {
+  height: 3rem;
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+.btn-dev:hover {
+  background-color: #0088cc;
 }
 
-/* /////////// Responsive /////////// */
+/* Modal del desarrollador */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  color: #333;
+}
+.modal-content h3 {
+  margin-bottom: 15px;
+  color: #00aaff;
+}
+.modal-content p {
+  margin: 8px 0;
+}
+.modal-content .dev-social {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.modal-content .dev-social a {
+  color: #1a1a1a;
+  font-size: 20px;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: auto;
+}
+.close:hover {
+  color: #000;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .main-title {
-    font-size: 3rem;
-  }
-
-  .showcase-container p {
-    font-size: 1.4rem;
-  }
-
-  .food-menu-item {
-    flex-direction: column;
-    text-align: center;
-
-  }
-
-  .food-description {
-    text-align: center;
-  }
-
-  .food-img img {
-    margin-bottom: 1rem;
-  }
-
-  .about-wrapper {
-    text-align: center;
-  }
-
-  .about-text,
-  .about-img {
-    flex: 1 1 100%;
-  }
-
-  .contact-container {
-    flex-direction: column;
-  }
-
-  .contact-img,
-  .form-container {
-    width: 100%;
-  }
-}
-
-@media (max-width: 500px) {
-  html {
-    font-size: 65%;
-  }
-
-  .menu-items li {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .main-title {
-    font-size: 2.8rem;
-  }
-
-  .testimonial-container {
-    flex-direction: column;
+  .footer-left {
     align-items: center;
   }
-
-  .testimonial-box {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .food-menu-item {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-  }
-
-  .food-img img {
-    height: 250px;
+  .btn-dev {
+    margin-top: 10px;
   }
 }
 
@@ -738,13 +691,10 @@ body {
   transform: translateY(30px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
-
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* Puedes personalizar por sección si quieres tiempos distintos */
 #about.fade-in,
 #category.fade-in,
 #products.fade-in,
@@ -752,4 +702,3 @@ body {
 #contact.fade-in {
   transition-delay: 0.6s;
 }
-

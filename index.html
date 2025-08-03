@@ -16,26 +16,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
   <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="navbar-container container">
-        <input type="checkbox" name="" id="" />
-        <div class="hamburger-lines">
-          <span class="line line1"></span>
-          <span class="line line2"></span>
-          <span class="line line3"></span>
-        </div>
-        <ul class="menu-items">
-          <li><a href="#home">Inicio</a></li>
-          <li><a href="#about">Acerca de</a></li>
-          <li><a href="#category">Categorías</a></li>
-          <li><a href="#products">Productos</a></li>
-          <li><a href="#testimonials">Testimonios</a></li>
-          <li><a href="#contact">Contacto</a></li>
-        </ul>
-        <h1 class="logo">Carnes & Co.</h1>
+  <!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-container container">
+    
+    <!-- Checkbox que controla el menú móvil -->
+    <input type="checkbox" id="menu-toggle">  
+
+    <!-- Hamburger icon (label para el checkbox) -->
+    <label for="menu-toggle" class="hamburger-menu">
+      <div class="hamburger-lines">
+        <span class="line line1"></span>
+        <span class="line line2"></span>
+        <span class="line line3"></span>
       </div>
-    </nav>
+    </label>
+
+    <!-- Menú de navegación -->
+    <ul class="menu-items">
+      <li><a href="#home">Inicio</a></li>
+      <li><a href="#about">Acerca de</a></li>
+      <li><a href="#category">Categorías</a></li>
+      <li><a href="#products">Productos</a></li>
+      <li><a href="#testimonials">Testimonios</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+
+    <!-- Logo -->
+    <h1 class="logo">Carnes & Co.</h1>
+  </div>
+</nav>
+
 
     <!-- HOME -->
     <section class="showcase-area" id="home">
@@ -282,13 +293,64 @@
     </section>
 
     <!-- FOOTER -->
-    <footer id="footer">
+<!--     <footer id="footer">
       <h3>Carnes & Co. &copy; Todos los derechos reservados</h3>
       <h4>Desarrollador: Guillermo Martínez</h4>
     </footer>
+ -->
+ <!-- Footer -->
+  <footer id="footer">
+    <div class="footer-left">
+      <p>Carnes & Co Todos los derechos reservados</p>
+      <div class="social-icons">
+        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+
+    <button class="btn-dev" id="openModal">Desarrollador</button>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="devModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h3>Información del Desarrollador</h3>
+      <p><strong>Nombre:</strong> Juan Pérez</p>
+      <p><strong>Teléfono:</strong> +54 9 11 1234-5678</p>
+      <p><strong>Email:</strong> juan.perez@desarrollador.com</p>
+      <div class="dev-social">
+        <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="app.js"></script>
+     <!-- JavaScript para el modal -->
+  <script>
+    const modal = document.getElementById("devModal");
+    const btn = document.getElementById("openModal");
+    const span = document.getElementById("closeModal");
+
+    btn.onclick = function() {
+      modal.style.display = "flex";
+    }
+
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
   </body>
 </html>
