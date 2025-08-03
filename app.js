@@ -79,3 +79,15 @@ $(document).ready(function () {
 
   // No necesitas más JS: la animación X está manejada 100% por CSS
 });
+
+
+// ====== 4. Back to Top Button ======
+const backToTopButton = $('#backToTop');
+
+$(window).on('scroll', function () {
+  if ($(this).scrollTop() > 300) {
+    backToTopButton.addClass('show');
+  } else {
+    backToTopButton.removeClass('show');
+  }
+});
