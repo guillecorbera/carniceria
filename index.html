@@ -292,65 +292,53 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
-<!--     <footer id="footer">
-      <h3>Carnes & Co. &copy; Todos los derechos reservados</h3>
-      <h4>Desarrollador: Guillermo Martínez</h4>
-    </footer>
- -->
- <!-- Footer -->
-  <footer id="footer">
-    <div class="footer-left">
-      <p>Carnes & Co Todos los derechos reservados</p>
-      <div class="social-icons">
-        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
-        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-      </div>
-    </div>
+<!-- FOOTER -->
+<footer id="footer">
+  <h3>Carnes & Co. &copy; Todos los derechos reservados</h3>
+  <button id="devButton">Ver Desarrollador</button>
+  <div class="social-icons">
+    <a href="https://instagram.com" target="blank" aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://facebook.com" target="blank" aria-label="Facebook">
+      <i class="fab fa-facebook"></i>
+    </a>
+    <a href="https://youtube.com" target="blank" aria-label="YouTube">
+      <i class="fab fa-youtube"></i>
+    </a>
+  </div>
+</footer>
 
-    <button class="btn-dev" id="openModal">Desarrollador</button>
-  </footer>
+<!-- Flecha para volver al inicio -->
+<a href="#home" id="backToTop">
+  <i class="fas fa-arrow-up"></i>
+</a>
 
-  <!-- Modal -->
-  <div class="modal" id="devModal">
-    <div class="modal-content">
-      <span class="close" id="closeModal">&times;</span>
-      <h3>Información del Desarrollador</h3>
-      <p><strong>Nombre:</strong> Juan Pérez</p>
-      <p><strong>Teléfono:</strong> +54 9 11 1234-5678</p>
-      <p><strong>Email:</strong> juan.perez@desarrollador.com</p>
-      <div class="dev-social">
-        <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-      </div>
+<!-- Modal del Desarrollador -->
+<div id="devModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Información del Desarrollador</h2>
+    <p><strong>Nombre:</strong> Guillermo Martínez</p>
+    <p><strong>Teléfono:</strong> +54 9 11 1234-5678</p>
+    <p><strong>Correo:</strong> <a href="mailto:guillermo.martinez@email.com">guillermo.martinez@email.com</a></p>
+    <div class="modal-social">
+      <a href="https://instagram.com/guillermo_dev" target="_blank">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a href="https://facebook.com/guillermo.martinez.dev" target="_blank">
+        <i class="fab fa-facebook"></i> Facebook
+      </a>
+      <a href="https://youtube.com/@guillermodev" target="_blank">
+        <i class="fab fa-youtube"></i> YouTube
+      </a>
     </div>
   </div>
+</div>
 
     <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="app.js"></script>
-     <!-- JavaScript para el modal -->
-  <script>
-    const modal = document.getElementById("devModal");
-    const btn = document.getElementById("openModal");
-    const span = document.getElementById("closeModal");
-
-    btn.onclick = function() {
-      modal.style.display = "flex";
-    }
-
-    span.onclick = function() {
-      modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  </script>
-
   </body>
 </html>
